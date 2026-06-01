@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Local Claude Code / preview config (disposable)
+.claude/
+
+# Internal working docs — not for the public hosting repo
+progress.md
+Claude_Code_Handoff_HTML_Teacher_Guide.md
+Final_Hydraulic_Rescue_Arm_Teacher_Guide.docx
+
+# Large source artifacts (not needed to build or host index.html)
+Hydraulic Arm 2026.pdf
+Hydraulic Arm 2026_Final.pptx
+
+# Leftover clutter
+mockup.html
+assets copy/
