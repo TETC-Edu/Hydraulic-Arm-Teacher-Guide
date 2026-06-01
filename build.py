@@ -508,6 +508,18 @@ a{color:var(--teal);}
 .prep-summary{display:flex;align-items:center;gap:12px;margin:0 0 12px;font-family:'Outfit';font-weight:600;font-size:13px;color:var(--teal-text);}
 .prep-summary .bar{flex:1;height:7px;background:var(--teal-soft);border-radius:4px;overflow:hidden;}
 .prep-summary .bar i{display:block;height:100%;width:0;background:var(--magenta);transition:width .25s;}
+/* prep checklist dropdown */
+.prep-block{margin:38px 0 0;}
+.prep-head{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:0;
+  font-size:14px;font-family:'Outfit';font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--teal-text);}
+.prep-head::-webkit-details-marker{display:none;}
+.prep-head:before{content:"";flex:none;width:22px;height:3px;background:var(--magenta);border-radius:2px;}
+.prep-head-title{flex:none;white-space:nowrap;}
+.prep-head .prep-summary{flex:1;margin:0;text-transform:none;letter-spacing:normal;}
+.prep-head:hover .prep-head-title{color:var(--teal);}
+.prep-chev{flex:none;width:15px;height:15px;stroke:var(--teal-text);stroke-width:2.5;fill:none;transition:transform .2s;}
+.prep-block[open] .prep-chev{transform:rotate(180deg);}
+.prep-block .prep{margin-top:14px;}
 
 /* DAY view */
 .day-head{background:linear-gradient(135deg,var(--teal-dark),var(--teal-deep));color:#fff;border-radius:14px;
@@ -814,9 +826,14 @@ def render_home():
   <div class="section-title">Unit objectives</div>
   <div class="grid g2">{objs}</div>
 
-  <div class="section-title">Prep checklist</div>
-  <div class="prep-summary"><span id="prep-count">0 / {len(PREP)}</span><div class="bar"><i id="prep-bar"></i></div></div>
-  <div class="prep">{prep_rows}</div>
+  <details class="prep-block">
+    <summary class="prep-head">
+      <span class="prep-head-title">Prep checklist</span>
+      <span class="prep-summary"><span id="prep-count">0 / {len(PREP)}</span><div class="bar"><i id="prep-bar"></i></div></span>
+      <svg class="prep-chev" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg>
+    </summary>
+    <div class="prep">{prep_rows}</div>
+  </details>
 
   <div class="section-title">How to use this guide</div>
   <div class="card" style="font-size:14.5px;color:var(--ink-soft);">
