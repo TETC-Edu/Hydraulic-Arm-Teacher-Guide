@@ -288,9 +288,9 @@ DAY2 = [
                 "Filling syringes early / dry-run only today, water is Day 3"],
          ask=[("Can you give us the answer?", "What does the system do right now? What is the one thing you would change to test next?"),
               ("Is it okay that this broke?", "What did it tell you? Failure is data. What is your next iteration?")],
-         note="Maximum uninterrupted build time is the whole pedagogy of Day 2. Coaches diagnose with questions so teams own the fix. Open the failure-mode drawer for the full field guide.",
+         note="Maximum uninterrupted build time is the whole pedagogy of Day 2. Coaches diagnose with questions so teams own the fix. The full field guide is in the Reference tab.",
          callouts=[("warn", "Coach stance", "Circulate and diagnose. Ask the question that lets the team find it. Resist solving the problem for them."),
-                   ("pill", "Field guide", "Press the Failure Modes button (bottom right, or R) for the eight common failures, causes, and the question to ask.")],
+                   ("pill", "Field guide", "See the Reference tab (press 4) for the eight common failures, their cause, and the question to ask.")],
          extra="FAILURES"),
     dict(id="d2p3", num="03", tag="Evaluate", mins=5, title="Today taught you something", slide="slide16",
          screen="Day 2 reflection prompts in engineering notebooks.",
@@ -617,27 +617,10 @@ a{color:var(--teal);}
 .relay .node.zone{background:var(--magenta);}
 .relay .arr{color:var(--magenta);font-weight:800;font-size:18px;}
 
-/* failure drawer */
-.drawer-scrim{position:fixed;inset:0;background:rgba(15,70,81,.35);z-index:90;opacity:0;pointer-events:none;transition:.2s;}
-.drawer-scrim.open{opacity:1;pointer-events:auto;}
-.drawer{position:fixed;top:0;right:0;height:100%;width:min(480px,92vw);background:var(--bg);z-index:91;
-  transform:translateX(100%);transition:transform .26s ease;box-shadow:-12px 0 40px -20px rgba(0,0,0,.5);
-  display:flex;flex-direction:column;}
-.drawer.open{transform:translateX(0);}
-.drawer-head{background:var(--teal-dark);color:#fff;padding:18px 20px;}
-.drawer-head h3{margin:0;font-size:18px;}
-.drawer-head p{margin:4px 0 0;font-size:12.5px;opacity:.85;}
-.drawer-head .x{position:absolute;top:16px;right:18px;background:none;border:0;color:#fff;font-size:22px;cursor:pointer;}
-.drawer-search{padding:12px 20px;border-bottom:1px solid var(--rule);background:var(--paper);}
-.drawer-search input{width:100%;border:1px solid var(--rule-strong);border-radius:8px;padding:9px 12px;font:inherit;font-size:14px;}
-.drawer-search input:focus{outline:none;border-color:var(--teal);}
-.drawer-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
-.drawer-chips button{font:inherit;font-family:'Outfit';font-weight:600;font-size:11.5px;border:1px solid var(--rule-strong);
-  background:#fff;color:var(--ink-soft);padding:5px 10px;border-radius:20px;cursor:pointer;text-transform:capitalize;}
-.drawer-chips button.on{background:var(--magenta);color:#fff;border-color:var(--magenta);}
-.drawer-body{overflow-y:auto;padding:14px 20px 40px;}
-.fm{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;margin-bottom:11px;}
-.fm.hide{display:none;}
+/* failure mode cards (Reference) */
+.fmlist{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;}
+@media(max-width:760px){.fmlist{grid-template-columns:1fr;}}
+.fm{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;}
 .fm .see{font-family:'Outfit';font-weight:700;color:var(--teal-dark);font-size:14.5px;}
 .fm .cat{float:right;font-family:'Outfit';font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.06em;
   color:var(--teal-text);background:var(--teal-soft);padding:3px 8px;border-radius:12px;}
@@ -654,7 +637,6 @@ a{color:var(--teal);}
 .fab{position:fixed;right:22px;bottom:22px;z-index:50;display:flex;flex-direction:column;gap:9px;}
 .fab button{font:inherit;font-family:'Outfit';font-weight:700;font-size:13px;border:0;cursor:pointer;border-radius:24px;
   padding:11px 16px;box-shadow:var(--shadow);}
-.fab .fm-btn{background:var(--magenta);color:#fff;}
 .fab .top-btn{background:var(--teal);color:#fff;}
 .fab button:hover{filter:brightness(1.07);}
 
@@ -670,7 +652,7 @@ a{color:var(--teal);}
 
 /* print */
 @media print{
-  .topbar,.timer-bar,.fab,.drawer,.drawer-scrim,.phase-tools,.phase-notes,.nav{display:none!important;}
+  .topbar,.timer-bar,.fab,.phase-tools,.phase-notes,.nav{display:none!important;}
   body{background:#fff;font-size:11pt;}
   .view{display:block!important;}
   .wrap{max-width:none;padding:0;}
@@ -736,7 +718,7 @@ def render_extra(kind):
             + "</tbody></table>"
         )
     if kind == "FAILURES":
-        return ""  # field guide lives in the drawer
+        return ""  # field guide now lives in the Reference tab
     return ""
 
 
@@ -839,8 +821,8 @@ def render_home():
   <div class="card" style="font-size:14.5px;color:var(--ink-soft);">
     <p style="margin-top:0;">Click any phase to expand its coaching detail. Each phase has a suggested timer, prev/next navigation, and a private notes field saved on this device.</p>
     <p><b>Reference</b> (top nav or press 4) gathers everything you look up mid-class: a download for the slide deck, the syringe equation, configuration cheat-sheet, materials, payload and relay specs, race rules, and vocabulary.</p>
-    <p><b>Failure Modes</b> (press R or the magenta button, bottom right) opens the searchable Day 2 field guide. Print at any time; each phase is set to avoid splitting across pages.</p>
-    <p style="margin-bottom:0;"><b>Keyboard:</b> 1 / 2 / 3 jump to days &middot; 4 reference &middot; H home &middot; R failure modes &middot; arrows move between phases &middot; Esc closes.</p>
+    <p>The <b>Reference</b> tab also holds the Day 2 <b>failure-mode field guide</b>: the common failures, their cause, and the question to ask. Print at any time; each phase is set to avoid splitting across pages.</p>
+    <p style="margin-bottom:0;"><b>Keyboard:</b> 1 / 2 / 3 jump to days &middot; 4 reference &middot; H home &middot; arrows move between phases &middot; Esc closes.</p>
   </div>
 </section>"""
 
@@ -870,6 +852,12 @@ def render_reference():
         f'<span class="bggo">Open &rarr;</span></a>'
         for label, url, note in BACKGROUND
     )
+    fm_cards = "".join(
+        f'<div class="fm"><span class="cat">{esc(cat)}</span>'
+        f'<div class="see">{esc(see)}</div>'
+        f'<div class="cause">{esc(cause)}</div><div class="ask">{esc(ask)}</div></div>'
+        for see, cat, cause, ask in FAILURES
+    )
     deck_path = os.path.join(ROOT, DECK_FILE)
     deck_section = ""
     if os.path.exists(deck_path):
@@ -889,7 +877,7 @@ def render_reference():
     <div>
       <div class="eyebrow">Quick reference</div>
       <h2>Reference</h2>
-      <div class="goal">Everything you reach for mid-class in one place: the core equation, syringe configurations, materials, payload and relay setup, race rules, and vocabulary.</div>
+      <div class="goal">Everything you reach for mid-class in one place: the core equation, syringe configurations, materials, payload and relay setup, race rules, vocabulary, and the Day 2 failure-mode field guide.</div>
     </div>
     <div class="meta"><div class="time">At a glance</div></div>
   </div>
@@ -914,38 +902,14 @@ def render_reference():
   <div class="section-title">Vocabulary</div>
   <div class="card vocab">{vocab}</div>
 
+  <div class="section-title">Common failure modes</div>
+  <div class="note-block">Day 2 field guide. Diagnose by asking, not fixing. These are the common failures, their likely cause, and the question to put back to the team. Treat them as a starting point, not a checklist.</div>
+  <div class="fmlist">{fm_cards}</div>
+
   <div class="section-title">Background knowledge</div>
   <div class="bglist">{bg}</div>
   <div class="note-block" style="background:var(--teal-soft);border-left-color:var(--teal);color:var(--teal-dark);">Coach-facing refreshers. These open in a new tab and need an internet connection, unlike the rest of this guide.</div>
 </section>"""
-
-
-def render_drawer():
-    cats = sorted({f[1] for f in FAILURES})
-    chips = '<button class="on" data-cat="all" onclick="filterFM(\'all\',this)">all</button>'
-    chips += "".join(
-        f'<button data-cat="{c}" onclick="filterFM(\'{c}\',this)">{c}</button>' for c in cats
-    )
-    cards = "".join(
-        f'<div class="fm" data-cat="{cat}" data-text="{esc((see+" "+cause+" "+ask).lower())}">'
-        f'<span class="cat">{cat}</span><div class="see">{esc(see)}</div>'
-        f'<div class="cause">{esc(cause)}</div><div class="ask">{esc(ask)}</div></div>'
-        for see, cat, cause, ask in FAILURES
-    )
-    return f"""
-<div class="drawer-scrim" id="scrim" onclick="closeDrawer()"></div>
-<aside class="drawer" id="drawer">
-  <div class="drawer-head" style="position:relative;">
-    <button class="x" onclick="closeDrawer()">&times;</button>
-    <h3>Common failure modes</h3>
-    <p>Day 2 field guide. Diagnose by asking, not fixing. Filter or search to find it fast.</p>
-  </div>
-  <div class="drawer-search">
-    <input id="fm-search" type="text" placeholder="Search: spongy, leak, grip, bind..." oninput="searchFM(this.value)">
-    <div class="drawer-chips">{chips}</div>
-  </div>
-  <div class="drawer-body" id="fm-list">{cards}</div>
-</aside>"""
 
 
 # --------------------------------------------------------------------------
@@ -1036,25 +1000,6 @@ function loadNotes(){
   });
 }
 
-/* drawer */
-function openDrawer(){document.getElementById('drawer').classList.add('open');document.getElementById('scrim').classList.add('open');}
-function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('scrim').classList.remove('open');}
-let fmCat='all';
-function filterFM(cat,btn){
-  fmCat=cat;
-  document.querySelectorAll('.drawer-chips button').forEach(b=>b.classList.toggle('on',b===btn));
-  applyFM();
-}
-function searchFM(){applyFM();}
-function applyFM(){
-  const q=(document.getElementById('fm-search').value||'').toLowerCase().trim();
-  document.querySelectorAll('.fm').forEach(c=>{
-    const okCat=fmCat==='all'||c.dataset.cat===fmCat;
-    const okText=!q||c.dataset.text.includes(q);
-    c.classList.toggle('hide',!(okCat&&okText));
-  });
-}
-
 /* lightbox */
 function lightbox(src){const lb=document.getElementById('lightbox');lb.querySelector('img').src=src;lb.classList.add('open');}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
@@ -1065,8 +1010,8 @@ document.addEventListener('keydown',e=>{
   const k=e.key.toLowerCase();
   if(k==='1')setView('day1');else if(k==='2')setView('day2');else if(k==='3')setView('day3');
   else if(k==='4')setView('reference');
-  else if(k==='h')setView('home');else if(k==='r'){const d=document.getElementById('drawer');d.classList.contains('open')?closeDrawer():openDrawer();}
-  else if(k==='escape'){closeDrawer();closeLightbox();}
+  else if(k==='h')setView('home');
+  else if(k==='escape'){closeLightbox();}
 });
 
 window.addEventListener('DOMContentLoaded',()=>{loadPrep();loadNotes();
@@ -1089,7 +1034,6 @@ def build():
         for d in DAYS
     )
     nav += '<button data-view="reference" onclick="setView(\'reference\')">Reference</button>'
-    nav += '<button class="ghost" onclick="openDrawer()">Failure Modes</button>'
 
     js = JS.replace("__PHASE_IDS__", str(phase_ids))
 
@@ -1128,12 +1072,9 @@ def build():
 {render_reference()}
 </main>
 
-{render_drawer()}
-
 <div class="lightbox" id="lightbox" onclick="closeLightbox()"><img src="" alt="Enlarged slide"></div>
 
 <div class="fab">
-  <button class="fm-btn" onclick="openDrawer()">Failure Modes</button>
   <button class="top-btn" id="topBtn" style="display:none;" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">Top</button>
 </div>
 
