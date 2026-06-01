@@ -1082,6 +1082,7 @@ def build():
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hydraulic Rescue Arm &middot; TETC Teacher Guide</title>
+<link rel="icon" type="image/png" href="__MARK__">
 <style>{CSS}</style>
 </head>
 <body>
