@@ -561,8 +561,7 @@ a{color:var(--teal);}
 .sec-name{font-family:'Outfit';font-weight:800;font-size:19px;text-transform:uppercase;letter-spacing:.05em;line-height:1.1;}
 .sec-meta{font-family:'Outfit';font-weight:600;font-size:12px;opacity:.82;margin-top:3px;text-transform:uppercase;letter-spacing:.06em;}
 .sec-blurb{font-size:13px;opacity:.92;margin-top:7px;max-width:66ch;line-height:1.5;}
-.sec-phases{border-left:3px solid var(--teal-soft);margin-left:13px;padding-left:15px;}
-@media(max-width:680px){.sec-phases{margin-left:0;padding-left:0;border-left:0;}}
+.sec-phases{}  /* beat cards stay full-width under the section band */
 
 /* phase card */
 .phase{background:var(--paper);border:1px solid var(--rule);border-radius:11px;margin-bottom:13px;box-shadow:var(--shadow);
