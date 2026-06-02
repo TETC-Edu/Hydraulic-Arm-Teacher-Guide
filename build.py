@@ -170,35 +170,22 @@ DAY1 = [
          note="Constructivist open. Students generate the pattern before any term exists. The observation column forces them to articulate it, which becomes the bridge into instruction. Do not name Pascal yet.",
          callouts=[("warn", "Watch for", "Listen for language like more force but less movement or it barely moved but pushed really hard. Those exact phrases are your handoff into the next phase.")],
          extra=""),
-    dict(id="d1p2", num="02", tag="Explicit Instruction", mins=3, title="Name what they already felt", slide="slide04",
-         screen="Pascal's Principle introduced. Pressure in a confined fluid transmits equally in all directions.",
-         say="What you felt has a name. Push on a confined fluid and the pressure goes everywhere equally. That is Pascal's Principle. The force you felt change was the system spending pressure across a bigger area.",
-         do="Connect their words to the term. Take two or three team observations from Engage and relabel them with the vocabulary out loud.",
-         watch=["Students treating this as new info / it is not, it is a name for what they measured",
-                "Confusion between pressure and force / pressure is force over area, hold that distinction"],
-         ask=[("Is pressure the same as force?", "Close. Pressure is force spread over an area. What happens to force if the same pressure acts on a bigger area?")],
-         note="Threshold move: the idea was already in the room. You are handing them the word for an experience, not delivering a fact they must accept on authority.",
-         callouts=[("def", "Pascal's Principle", "Pressure applied to a confined fluid transmits equally in all directions throughout that fluid.")],
-         extra=""),
-    dict(id="d1p3", num="03", tag="Explicit Instruction", mins=4, title="Why a little wider means a lot stronger", slide="slide05",
-         screen="Area ratio reasoning. Area depends on the square of diameter, so small diameter changes produce large force changes.",
-         say="The output syringe is wider, so the same pressure acts on more area, so more force comes out. And because area grows with the square of diameter, a little wider means a lot stronger. What you gain in force you give back in distance.",
-         do="Draw or point to the two syringe faces. Emphasize the squared relationship before the formula appears.",
-         watch=["Teams thinking double the width means double the force / it is the square, surface that now",
-                "The distance trade getting lost / every force gain costs travel"],
-         ask=[("Why squared and not just bigger?", "What are you actually comparing, the width across or the whole circle of fluid being pushed?")],
-         note="This is the conceptual load-bearing step. If they own why area is squared, the formula next phase is a summary, not a surprise.",
-         callouts=[("hero", "The core trade", "Force and distance are a single budget. The area ratio decides how the budget gets spent. No configuration gives you both.")],
-         extra=""),
-    dict(id="d1p4", num="04", tag="Explicit Instruction", mins=4, title="Here is the proof", slide="slide06",
-         screen="The formal equation. Force multiplier equals (output diameter / input diameter) squared.",
-         say="Here is the whole thing in one line. Force multiplier equals output diameter over input diameter, squared. That is the number your scales were circling around.",
-         do="Write the equation. Tie each symbol back to a part they held five minutes ago.",
-         watch=["Copying the formula without linking it to the syringes / point at the real parts",
-                "Plugging in radius vs diameter inconsistently / either works if consistent, flag it"],
-         ask=[("Does it matter if I use radius or diameter?", "Try both on the same pair. What do you get? Why does the ratio survive either way?")],
-         note="The equation arrives after the intuition and the reasoning, never before. It formalizes; it does not introduce.",
-         callouts=[("def", "Area ratio equation", "Force multiplier = (output diameter / input diameter)^2. Output area over input area sets how much the force is amplified.")],
+    dict(id="d1p2", num="02", tag="Explicit Instruction", mins=11, title="Name it, reason it, prove it", slide=["slide04", "slide05", "slide06"],
+         screen="Three moves in sequence. Name the physics: Pascal's Principle (slide04). Reason out why a little wider is a lot stronger, since area grows with the square of diameter (slide05). Then formalize it as the equation (slide06).",
+         say="What you felt has a name. Push on a confined fluid and the pressure goes everywhere equally. That is Pascal's Principle. Now, why does the wider output push harder? Same pressure on more area, so more force, and because area grows with the square of diameter, a little wider means a lot stronger. What you gain in force you give back in distance. Here is the whole thing in one line: force multiplier equals output diameter over input diameter, squared. That is the number your scales were circling around.",
+         do="Move in order, never ahead of it. First relabel two or three of their Engage observations with the vocabulary out loud. Then point at the two syringe faces and stress the squared relationship before any formula. Finally write the equation and tie each symbol back to a part they held five minutes ago.",
+         watch=["Students treating Pascal as new info / it is a name for what they already measured",
+                "Teams thinking double the width means double the force / it is the square, surface that now",
+                "The distance trade getting lost / every force gain costs travel",
+                "Copying the formula without linking it to the syringes / point at the real parts",
+                "Radius vs diameter used inconsistently / either works if consistent, flag it"],
+         ask=[("Is pressure the same as force?", "Close. Pressure is force spread over an area. What happens to force if the same pressure acts on a bigger area?"),
+              ("Why squared and not just bigger?", "What are you actually comparing, the width across or the whole circle of fluid being pushed?"),
+              ("Does it matter if I use radius or diameter?", "Try both on the same pair. What do you get? Why does the ratio survive either way?")],
+         note="One arc: felt, then named, then reasoned, then formalized. The equation arrives last, as a summary of intuition they already own, never as a fact handed down. If they own why area is squared, the formula is no surprise.",
+         callouts=[("def", "Pascal's Principle", "Pressure applied to a confined fluid transmits equally in all directions throughout that fluid."),
+                   ("hero", "The core trade", "Force and distance are a single budget. The area ratio decides how the budget gets spent. No configuration gives you both."),
+                   ("def", "Area ratio equation", "Force multiplier = (output diameter / input diameter)^2. Output area over input area sets how much the force is amplified.")],
          extra=""),
     dict(id="d1p5", num="05", tag="Practice", mins=4, title="Your turn on the numbers", slide="slide07",
          screen="Three to four escalating ratio problems on the student sheet, from basic calculation to applied design tradeoff.",
@@ -272,8 +259,7 @@ DAY1 = [
 # (Days 2 and 3 are short enough to stay flat.) Assignment is by phase id; sections
 # must stay contiguous in the list for the grouped renderer.
 _D1_SECTIONS = {
-    "d1p1": "Engage", "d1p2": "Engage", "d1p3": "Engage",
-    "d1p4": "Engage", "d1p5": "Engage", "d1p6": "Engage",
+    "d1p1": "Engage", "d1p2": "Engage", "d1p5": "Engage", "d1p6": "Engage",
     "d1p7": "Design", "d1p8": "Design",
     "d1p9": "Build",
     "d1p10": "Evaluate",
@@ -631,6 +617,10 @@ a{color:var(--teal);}
 .slide-shot{margin:4px 0 18px;}
 .slide-shot img{width:100%;border-radius:9px;border:1px solid var(--rule);cursor:zoom-in;display:block;}
 .slide-shot .cap{font-size:12px;color:var(--ink-faint);margin-top:6px;font-style:italic;}
+.slide-shot.multi{display:flex;flex-wrap:wrap;gap:8px;}
+.slide-shot.multi img{flex:1 1 0;min-width:160px;width:auto;}
+.slide-shot.multi .cap{flex-basis:100%;margin-top:0;}
+@media(max-width:680px){.slide-shot.multi img{min-width:120px;}}
 
 .field{margin:0 0 16px;}
 .field .flabel{font-family:'Outfit';font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.09em;
@@ -808,6 +798,12 @@ def render_phase(p, num=None):
     )
     extra = render_extra(p["extra"])
     shown_num = num if num is not None else p["num"]
+    slides = p["slide"] if isinstance(p["slide"], list) else [p["slide"]]
+    slide_imgs = "".join(
+        f'<img src="__{s.upper()}__" alt="Slide for {esc(p["title"])}" onclick="lightbox(this.src)">'
+        for s in slides
+    )
+    multi = " multi" if len(slides) > 1 else ""
     return f"""
 <div class="phase" id="{p['id']}" data-min="{p['mins']}" data-title="{esc(p['title'])}">
   <div class="phase-head" onclick="togglePhase('{p['id']}')">
@@ -820,7 +816,7 @@ def render_phase(p, num=None):
     </div>
   </div>
   <div class="phase-body">
-    <div class="slide-shot"><img src="__{p['slide'].upper()}__" alt="Slide for {esc(p['title'])}" onclick="lightbox(this.src)"><div class="cap">What's on screen</div></div>
+    <div class="slide-shot{multi}">{slide_imgs}<div class="cap">What's on screen</div></div>
     <div class="field"><div class="flabel">On screen</div><div class="ftext">{esc(p['screen'])}</div></div>
     <div class="field say"><div class="flabel">What to say</div><div class="ftext">{esc(p['say'])}</div></div>
     <div class="field"><div class="flabel">What to do</div><div class="ftext">{esc(p['do'])}</div></div>
