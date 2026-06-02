@@ -281,20 +281,44 @@ _D1_SECTIONS = {
 for _p in DAY1:
     _p["section"] = _D1_SECTIONS[_p["id"]]
 
+# Section blurbs are per-day: "Build" and "Evaluate" recur across days with different meaning.
+# Keyed by day id, then section name.
 SECTION_BLURBS = {
-    "Engage": "Feel the force-distance tradeoff, name the physics, prove it with the equation, then verify the gap under controlled input.",
-    "Design": "Set the challenge, then reverse-engineer the laser-cut kit and justify a build plan before any glue.",
-    "Build": "Commit to a direction, dry-fit, and surface the first real problems. Direction, not completion.",
-    "Evaluate": "Pause and write, so today's messy build becomes a plan Day 2 can open from at speed.",
+    "day1": {
+        "Engage": "Feel the force-distance tradeoff, name the physics, prove it with the equation, then verify the gap under controlled input.",
+        "Design": "Set the challenge, then reverse-engineer the laser-cut kit and justify a build plan before any glue.",
+        "Build": "Commit to a direction, dry-fit, and surface the first real problems. Direction, not completion.",
+        "Evaluate": "Pause and write, so today's messy build becomes a plan Day 2 can open from at speed.",
+    },
+    "day2": {
+        "Check-in": "Read yesterday's notebook plan and pick up exactly where each team left off.",
+        "Build": "One long, uninterrupted build-and-test window. Diagnose by asking; teams own the fix.",
+        "Evaluate": "Name what today's testing taught, so tomorrow starts from a known state.",
+    },
+    "day3": {
+        "Build & Practice": "Finish and fill, then run solo precision lifts to dial the arm in before it counts.",
+        "Compete": "The random multi-robot relay. Reliability beats one impressive run.",
+        "Debrief": "Tie performance back to design decisions and close the unit.",
+    },
 }
 
-# Per-section accent + soft background, so the collapsed bands read as four distinct
-# cards instead of a wall of teal. (accent color, soft tint bg)
+# Per-section accent + soft background, so the collapsed bands read as distinct cards
+# instead of a wall of teal. Keyed by section name; colors are consistent by meaning
+# across days (builds = orange, closers = turquoise, openers = teal, headline = magenta).
+# The three non-teal accents are the TE+TC logo's accent-arrow colors. (accent, soft bg)
+_ACC_TEAL = ("var(--teal)", "var(--teal-soft)")
+_ACC_MAGENTA = ("var(--magenta)", "var(--magenta-soft)")
+_ACC_ORANGE = ("var(--orange)", "#F8ECDD")
+_ACC_TURQUOISE = ("var(--turquoise)", "var(--turquoise-soft)")
 SECTION_ACCENTS = {
-    "Engage": ("var(--teal)", "var(--teal-soft)"),
-    "Design": ("var(--magenta)", "var(--magenta-soft)"),
-    "Build": ("var(--orange)", "#F8ECDD"),
-    "Evaluate": ("var(--turquoise)", "var(--turquoise-soft)"),
+    "Engage": _ACC_TEAL,
+    "Check-in": _ACC_TEAL,
+    "Design": _ACC_MAGENTA,
+    "Compete": _ACC_MAGENTA,
+    "Build": _ACC_ORANGE,
+    "Build & Practice": _ACC_ORANGE,
+    "Evaluate": _ACC_TURQUOISE,
+    "Debrief": _ACC_TURQUOISE,
 }
 
 DAY2 = [
@@ -382,6 +406,16 @@ DAY3 = [
          callouts=[("def", "Notebook prompts", "1 / Cleanest handoff today and what made it work?  2 / Did the best-built robot always win? If not, why?  3 / How is today connected to the syringe equation from Day 1?  4 / With one more day, what would you change?")],
          extra=""),
 ]
+
+_D2_SECTIONS = {"d2p1": "Check-in", "d2p2": "Build", "d2p3": "Evaluate"}
+_D3_SECTIONS = {
+    "d3p1": "Build & Practice", "d3p2": "Build & Practice",
+    "d3p3": "Compete", "d3p4": "Debrief",
+}
+for _p in DAY2:
+    _p["section"] = _D2_SECTIONS[_p["id"]]
+for _p in DAY3:
+    _p["section"] = _D3_SECTIONS[_p["id"]]
 
 DAYS = [
     dict(id="day1", n=1, title="From Syringes to Systems", time="90 min", cover="slide01", second="slide02",
@@ -831,7 +865,7 @@ def render_day(d):
         for si, (sec, members) in enumerate(groups, start=1):
             mins = sum(m["mins"] for m in members)
             steps = f'{len(members)} step{"s" if len(members) != 1 else ""}'
-            blurb = SECTION_BLURBS.get(sec, "")
+            blurb = SECTION_BLURBS.get(d["id"], {}).get(sec, "")
             blurb_html = f'<div class="sec-blurb">{esc(blurb)}</div>' if blurb else ""
             acc, accbg = SECTION_ACCENTS.get(sec, ("var(--teal)", "var(--teal-soft)"))
             cards = "".join(
