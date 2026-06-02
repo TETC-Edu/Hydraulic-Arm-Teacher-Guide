@@ -553,15 +553,20 @@ a{color:var(--teal);}
 .day-cover{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}
 .day-cover img{flex:1 1 0;min-width:200px;border-radius:9px;border:1px solid var(--rule);box-shadow:var(--shadow);cursor:zoom-in;}
 
-/* day sections (grouping of phase cards) */
-.day-section{margin-bottom:26px;}
-.sec-head{display:flex;align-items:flex-start;gap:16px;padding:15px 20px;border-radius:12px;
-  background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;box-shadow:var(--shadow);margin-bottom:13px;}
+/* day sections (collapsible grouping of phase cards) */
+.day-section{margin-bottom:14px;}
+.sec-head{display:flex;align-items:flex-start;gap:16px;padding:15px 20px;border-radius:12px;cursor:pointer;list-style:none;
+  background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;box-shadow:var(--shadow);transition:filter .15s;}
+.sec-head::-webkit-details-marker{display:none;}
+.sec-head:hover{filter:brightness(1.06);}
+.day-section[open] .sec-head{margin-bottom:13px;}
 .sec-num{font-family:'Outfit';font-weight:800;font-size:32px;line-height:1;opacity:.85;min-width:26px;}
+.sec-info{flex:1;}
 .sec-name{font-family:'Outfit';font-weight:800;font-size:19px;text-transform:uppercase;letter-spacing:.05em;line-height:1.1;}
 .sec-meta{font-family:'Outfit';font-weight:600;font-size:12px;opacity:.82;margin-top:3px;text-transform:uppercase;letter-spacing:.06em;}
 .sec-blurb{font-size:13px;opacity:.92;margin-top:7px;max-width:66ch;line-height:1.5;}
-.sec-phases{}  /* beat cards stay full-width under the section band */
+.sec-chev{flex:none;width:18px;height:18px;color:#fff;opacity:.85;margin-top:5px;transition:transform .2s;}
+.day-section[open] .sec-chev{transform:rotate(180deg);}
 
 /* phase card */
 .phase{background:var(--paper);border:1px solid var(--rule);border-radius:11px;margin-bottom:13px;box-shadow:var(--shadow);
@@ -820,11 +825,13 @@ def render_day(d):
                 render_phase(p, num=str(bi)) for bi, p in enumerate(members, start=1)
             )
             blocks.append(
-                f'<div class="day-section">'
-                f'<div class="sec-head"><div class="sec-num">{si}</div>'
+                f'<details class="day-section">'
+                f'<summary class="sec-head"><div class="sec-num">{si}</div>'
                 f'<div class="sec-info"><div class="sec-name">{esc(sec)}</div>'
-                f'<div class="sec-meta">{steps} &middot; {mins} min</div>{blurb_html}</div></div>'
-                f'<div class="sec-phases">{cards}</div></div>'
+                f'<div class="sec-meta">{steps} &middot; {mins} min</div>{blurb_html}</div>'
+                f'<svg class="sec-chev" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>'
+                f'</summary>'
+                f'<div class="sec-phases">{cards}</div></details>'
             )
         phases = "".join(blocks)
         count_label = f'{len(groups)} sections'
@@ -1007,6 +1014,9 @@ function openPhase(id){
   // make sure its day view is active
   const view = el.closest('.view');
   if(view) setView(view.id.replace('view-',''));
+  // if this beat lives in a collapsed section, open the section first
+  const sec = el.closest('details.day-section');
+  if(sec && !sec.open) sec.open = true;
   if(!el.classList.contains('open')) el.classList.add('open');
   setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),60);
 }
