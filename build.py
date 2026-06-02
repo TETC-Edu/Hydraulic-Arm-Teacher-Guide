@@ -288,6 +288,15 @@ SECTION_BLURBS = {
     "Evaluate": "Pause and write, so today's messy build becomes a plan Day 2 can open from at speed.",
 }
 
+# Per-section accent + soft background, so the collapsed bands read as four distinct
+# cards instead of a wall of teal. (accent color, soft tint bg)
+SECTION_ACCENTS = {
+    "Engage": ("var(--teal)", "var(--teal-soft)"),
+    "Design": ("var(--magenta)", "var(--magenta-soft)"),
+    "Build": ("var(--orange)", "#F8ECDD"),
+    "Evaluate": ("var(--teal-deep)", "#E6EFEA"),
+}
+
 DAY2 = [
     dict(id="d2p1", num="01", tag="Check-In", mins=5, title="Pick up where you left off", slide="slide14",
          screen="Day 2 opener. Teams review Day 1 notebooks and the priority they wrote down. The day's gate is stated.",
@@ -554,18 +563,20 @@ a{color:var(--teal);}
 .day-cover img{flex:1 1 0;min-width:200px;border-radius:9px;border:1px solid var(--rule);box-shadow:var(--shadow);cursor:zoom-in;}
 
 /* day sections (collapsible grouping of phase cards) */
-.day-section{margin-bottom:14px;}
-.sec-head{display:flex;align-items:flex-start;gap:16px;padding:15px 20px;border-radius:12px;cursor:pointer;list-style:none;
-  background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;box-shadow:var(--shadow);transition:filter .15s;}
+.day-section{margin-bottom:12px;}
+.sec-head{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:12px;cursor:pointer;list-style:none;
+  background:var(--accbg);border:1px solid var(--rule);border-left:6px solid var(--acc);color:var(--ink);
+  box-shadow:var(--shadow);transition:filter .15s,box-shadow .15s;}
 .sec-head::-webkit-details-marker{display:none;}
-.sec-head:hover{filter:brightness(1.06);}
-.day-section[open] .sec-head{margin-bottom:13px;}
-.sec-num{font-family:'Outfit';font-weight:800;font-size:32px;line-height:1;opacity:.85;min-width:26px;}
+.sec-head:hover{filter:brightness(.985);box-shadow:0 2px 0 rgba(0,0,0,.04),0 14px 30px -16px rgba(15,70,81,.3);}
+.day-section[open] .sec-head{margin-bottom:13px;align-items:flex-start;}
+.sec-num{flex:none;width:44px;height:44px;border-radius:11px;background:var(--acc);color:#fff;
+  font-family:'Outfit';font-weight:800;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;}
 .sec-info{flex:1;}
-.sec-name{font-family:'Outfit';font-weight:800;font-size:19px;text-transform:uppercase;letter-spacing:.05em;line-height:1.1;}
-.sec-meta{font-family:'Outfit';font-weight:600;font-size:12px;opacity:.82;margin-top:3px;text-transform:uppercase;letter-spacing:.06em;}
-.sec-blurb{font-size:13px;opacity:.92;margin-top:7px;max-width:66ch;line-height:1.5;}
-.sec-chev{flex:none;width:18px;height:18px;color:#fff;opacity:.85;margin-top:5px;transition:transform .2s;}
+.sec-name{font-family:'Outfit';font-weight:800;font-size:19px;text-transform:uppercase;letter-spacing:.05em;line-height:1.1;color:var(--ink);}
+.sec-meta{font-family:'Outfit';font-weight:700;font-size:12px;margin-top:3px;text-transform:uppercase;letter-spacing:.06em;color:var(--acc);}
+.sec-blurb{font-size:13px;color:var(--ink-soft);margin-top:7px;max-width:66ch;line-height:1.5;}
+.sec-chev{flex:none;width:18px;height:18px;color:var(--ink-faint);margin-top:3px;transition:transform .2s;}
 .day-section[open] .sec-chev{transform:rotate(180deg);}
 
 /* phase card */
@@ -821,11 +832,12 @@ def render_day(d):
             steps = f'{len(members)} step{"s" if len(members) != 1 else ""}'
             blurb = SECTION_BLURBS.get(sec, "")
             blurb_html = f'<div class="sec-blurb">{esc(blurb)}</div>' if blurb else ""
+            acc, accbg = SECTION_ACCENTS.get(sec, ("var(--teal)", "var(--teal-soft)"))
             cards = "".join(
                 render_phase(p, num=str(bi)) for bi, p in enumerate(members, start=1)
             )
             blocks.append(
-                f'<details class="day-section">'
+                f'<details class="day-section" style="--acc:{acc};--accbg:{accbg};">'
                 f'<summary class="sec-head"><div class="sec-num">{si}</div>'
                 f'<div class="sec-info"><div class="sec-name">{esc(sec)}</div>'
                 f'<div class="sec-meta">{steps} &middot; {mins} min</div>{blurb_html}</div>'
