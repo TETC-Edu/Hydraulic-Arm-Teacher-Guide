@@ -291,14 +291,14 @@ SECTION_BLURBS = {
         "Evaluate": "Pause and write, so today's messy build becomes a plan Day 2 can open from at speed.",
     },
     "day2": {
-        "Check-in": "Read yesterday's notebook plan and pick up exactly where each team left off.",
+        "Engage": "Read yesterday's notebook plan and pick up exactly where each team left off.",
         "Build": "One long, uninterrupted build-and-test window. Diagnose by asking; teams own the fix.",
         "Evaluate": "Name what today's testing taught, so tomorrow starts from a known state.",
     },
     "day3": {
-        "Build & Practice": "Finish and fill, then run solo precision lifts to dial the arm in before it counts.",
+        "Build": "Finish and fill, then run solo precision lifts to dial the arm in before it counts.",
         "Compete": "The random multi-robot relay. Reliability beats one impressive run.",
-        "Debrief": "Tie performance back to design decisions and close the unit.",
+        "Evaluate": "Tie performance back to design decisions and close the unit.",
     },
 }
 
@@ -312,13 +312,10 @@ _ACC_ORANGE = ("var(--orange)", "#F8ECDD")
 _ACC_TURQUOISE = ("var(--turquoise)", "var(--turquoise-soft)")
 SECTION_ACCENTS = {
     "Engage": _ACC_TEAL,
-    "Check-in": _ACC_TEAL,
     "Design": _ACC_MAGENTA,
     "Compete": _ACC_MAGENTA,
     "Build": _ACC_ORANGE,
-    "Build & Practice": _ACC_ORANGE,
     "Evaluate": _ACC_TURQUOISE,
-    "Debrief": _ACC_TURQUOISE,
 }
 
 DAY2 = [
@@ -407,10 +404,10 @@ DAY3 = [
          extra=""),
 ]
 
-_D2_SECTIONS = {"d2p1": "Check-in", "d2p2": "Build", "d2p3": "Evaluate"}
+_D2_SECTIONS = {"d2p1": "Engage", "d2p2": "Build", "d2p3": "Evaluate"}
 _D3_SECTIONS = {
-    "d3p1": "Build & Practice", "d3p2": "Build & Practice",
-    "d3p3": "Compete", "d3p4": "Debrief",
+    "d3p1": "Build", "d3p2": "Build",
+    "d3p3": "Compete", "d3p4": "Evaluate",
 }
 for _p in DAY2:
     _p["section"] = _D2_SECTIONS[_p["id"]]
