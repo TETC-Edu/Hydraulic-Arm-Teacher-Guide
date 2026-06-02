@@ -294,7 +294,7 @@ SECTION_ACCENTS = {
     "Engage": ("var(--teal)", "var(--teal-soft)"),
     "Design": ("var(--magenta)", "var(--magenta-soft)"),
     "Build": ("var(--orange)", "#F8ECDD"),
-    "Evaluate": ("var(--teal-deep)", "#E6EFEA"),
+    "Evaluate": ("var(--turquoise)", "var(--turquoise-soft)"),
 }
 
 DAY2 = [
@@ -406,6 +406,7 @@ CSS = """
 :root{
   --teal:#186172; --teal-dark:#134E5C; --teal-deep:#0f4651;
   --teal-soft:#E1EDEE; --teal-text:#5A8A93;
+  --turquoise:#0DB4AE; --turquoise-deep:#0A8F8A; --turquoise-soft:#E2F5F3;
   --magenta:#BD2F7F; --magenta-soft:#f7e6ef;
   --gold:#F0C896; --orange:#E8943A; --orange-text:#B87A2A;
   --ink:#333333; --ink-soft:#5a5a5a; --ink-faint:#8a8a8a;
