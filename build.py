@@ -268,6 +268,26 @@ DAY1 = [
          extra=""),
 ]
 
+# Day 1 groups its ten beats under four sections: Engage, Design, Build, Evaluate.
+# (Days 2 and 3 are short enough to stay flat.) Assignment is by phase id; sections
+# must stay contiguous in the list for the grouped renderer.
+_D1_SECTIONS = {
+    "d1p1": "Engage", "d1p2": "Engage", "d1p3": "Engage",
+    "d1p4": "Engage", "d1p5": "Engage", "d1p6": "Engage",
+    "d1p7": "Design", "d1p8": "Design",
+    "d1p9": "Build",
+    "d1p10": "Evaluate",
+}
+for _p in DAY1:
+    _p["section"] = _D1_SECTIONS[_p["id"]]
+
+SECTION_BLURBS = {
+    "Engage": "Feel the force-distance tradeoff, name the physics, prove it with the equation, then verify the gap under controlled input.",
+    "Design": "Set the challenge, then reverse-engineer the laser-cut kit and justify a build plan before any glue.",
+    "Build": "Commit to a direction, dry-fit, and surface the first real problems. Direction, not completion.",
+    "Evaluate": "Pause and write, so today's messy build becomes a plan Day 2 can open from at speed.",
+}
+
 DAY2 = [
     dict(id="d2p1", num="01", tag="Check-In", mins=5, title="Pick up where you left off", slide="slide14",
          screen="Day 2 opener. Teams review Day 1 notebooks and the priority they wrote down. The day's gate is stated.",
@@ -533,6 +553,17 @@ a{color:var(--teal);}
 .day-cover{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}
 .day-cover img{flex:1 1 0;min-width:200px;border-radius:9px;border:1px solid var(--rule);box-shadow:var(--shadow);cursor:zoom-in;}
 
+/* day sections (grouping of phase cards) */
+.day-section{margin-bottom:26px;}
+.sec-head{display:flex;align-items:flex-start;gap:16px;padding:15px 20px;border-radius:12px;
+  background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;box-shadow:var(--shadow);margin-bottom:13px;}
+.sec-num{font-family:'Outfit';font-weight:800;font-size:32px;line-height:1;opacity:.85;min-width:26px;}
+.sec-name{font-family:'Outfit';font-weight:800;font-size:19px;text-transform:uppercase;letter-spacing:.05em;line-height:1.1;}
+.sec-meta{font-family:'Outfit';font-weight:600;font-size:12px;opacity:.82;margin-top:3px;text-transform:uppercase;letter-spacing:.06em;}
+.sec-blurb{font-size:13px;opacity:.92;margin-top:7px;max-width:66ch;line-height:1.5;}
+.sec-phases{border-left:3px solid var(--teal-soft);margin-left:13px;padding-left:15px;}
+@media(max-width:680px){.sec-phases{margin-left:0;padding-left:0;border-left:0;}}
+
 /* phase card */
 .phase{background:var(--paper);border:1px solid var(--rule);border-radius:11px;margin-bottom:13px;box-shadow:var(--shadow);
   overflow:hidden;transition:border-color .15s;}
@@ -722,17 +753,18 @@ def render_extra(kind):
     return ""
 
 
-def render_phase(p):
+def render_phase(p, num=None):
     watch = "".join(f"<li>{esc(w)}</li>" for w in p["watch"])
     ask = "".join(
         f'<div class="qa"><div class="q">{esc(q)}</div><div class="a">{esc(a)}</div></div>'
         for q, a in p["ask"]
     )
     extra = render_extra(p["extra"])
+    shown_num = num if num is not None else p["num"]
     return f"""
 <div class="phase" id="{p['id']}" data-min="{p['mins']}" data-title="{esc(p['title'])}">
   <div class="phase-head" onclick="togglePhase('{p['id']}')">
-    <div class="phase-num">{p['num']}</div>
+    <div class="phase-num">{shown_num}</div>
     <div><span class="phase-tag">{esc(p['tag'])}</span></div>
     <div class="phase-title">{esc(p['title'])}</div>
     <div style="display:flex;align-items:center;gap:12px;">
@@ -761,11 +793,45 @@ def render_phase(p):
 </div>"""
 
 
+def _group_sections(phases):
+    """Group a phase list into ordered (section_name, [phases]) tuples.
+    Consecutive phases sharing a section key are grouped; sections must be contiguous."""
+    groups = []
+    for p in phases:
+        sec = p.get("section")
+        if not groups or groups[-1][0] != sec:
+            groups.append((sec, []))
+        groups[-1][1].append(p)
+    return groups
+
+
 def render_day(d):
     cover = f'<img src="__{d["cover"].upper()}__" alt="Day {d["n"]} cover" onclick="lightbox(this.src)">'
     if d["second"]:
         cover += f'<img src="__{d["second"].upper()}__" alt="Day {d["n"]} objectives" onclick="lightbox(this.src)">'
-    phases = "".join(render_phase(p) for p in d["phases"])
+    if any(p.get("section") for p in d["phases"]):
+        groups = _group_sections(d["phases"])
+        blocks = []
+        for si, (sec, members) in enumerate(groups, start=1):
+            mins = sum(m["mins"] for m in members)
+            steps = f'{len(members)} step{"s" if len(members) != 1 else ""}'
+            blurb = SECTION_BLURBS.get(sec, "")
+            blurb_html = f'<div class="sec-blurb">{esc(blurb)}</div>' if blurb else ""
+            cards = "".join(
+                render_phase(p, num=str(bi)) for bi, p in enumerate(members, start=1)
+            )
+            blocks.append(
+                f'<div class="day-section">'
+                f'<div class="sec-head"><div class="sec-num">{si}</div>'
+                f'<div class="sec-info"><div class="sec-name">{esc(sec)}</div>'
+                f'<div class="sec-meta">{steps} &middot; {mins} min</div>{blurb_html}</div></div>'
+                f'<div class="sec-phases">{cards}</div></div>'
+            )
+        phases = "".join(blocks)
+        count_label = f'{len(groups)} sections'
+    else:
+        phases = "".join(render_phase(p) for p in d["phases"])
+        count_label = f'{len(d["phases"])} phases'
     return f"""
 <section class="view" id="view-{d['id']}">
   <div class="day-head">
@@ -774,7 +840,7 @@ def render_day(d):
       <h2>{esc(d['title'])}</h2>
       <div class="goal">{esc(d['goal'])}</div>
     </div>
-    <div class="meta"><div class="time">{d['time']}</div><div class="cnt">{len(d['phases'])} phases</div></div>
+    <div class="meta"><div class="time">{d['time']}</div><div class="cnt">{count_label}</div></div>
   </div>
   <div class="day-cover">{cover}</div>
   {phases}
@@ -782,9 +848,14 @@ def render_day(d):
 
 
 def render_home():
+    def _count_label(d):
+        if any(p.get("section") for p in d["phases"]):
+            return f'{len(_group_sections(d["phases"]))} sections'
+        return f'{len(d["phases"])} phases'
+
     arc = "".join(
         f'<a href="#" onclick="setView(\'{d["id"]}\');return false;"><div class="d">Day {d["n"]}</div>'
-        f'<div class="t">{esc(d["title"])}</div><div class="m">{d["time"]} &middot; {len(d["phases"])} phases</div></a>'
+        f'<div class="t">{esc(d["title"])}</div><div class="m">{d["time"]} &middot; {_count_label(d)}</div></a>'
         for d in DAYS
     )
     objs = "".join(
