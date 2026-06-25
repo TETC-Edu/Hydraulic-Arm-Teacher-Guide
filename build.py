@@ -145,6 +145,14 @@ BACKGROUND = [
      "A short video walking through pressure in a confined fluid. The clearest refresher before teaching the Day 1 physics."),
 ]
 
+# Student-facing companion web app for Day 1. Hosted; opens in a browser, needs internet.
+COMPANION_APP = dict(
+    title="Hydraulic Force Lab",
+    url="https://tetc-edu.github.io/Hydraulic-Force-Lab-Companion/",
+    blurb="The Day 1 student web app &middot; open it on student devices",
+    detail="An interactive syringe simulator. Explore plays with diameter ratios, Measure checks predictions against the equation, and Practice works the challenge problems.",
+)
+
 # Race format facts for the reference hub
 RACE_RULES = [
     "60 seconds per match. Most completions wins.",
@@ -159,21 +167,21 @@ RACE_RULES = [
 
 DAY1 = [
     dict(id="d1p1", num="01", tag="Engage", mins=15, title="Force vs. distance, felt before named", slide="slide03",
-         screen="Title and prompt for the force-distance exploration. Two pre-connected syringe pairs per station: one 1:1, one small-to-big. Spring scales, rulers, chemistry clamps on the table.",
-         say="Two pairs in front of you. Push one, then the other. Measure what comes out. Write what you notice in your own words. Do not wait for me to name it.",
-         do="Circulate. Keep teams measuring, not theorizing. Have them flip the small-to-big pair and push from the big side to feel the inverse: more distance, less force. Hold the vocabulary back.",
+         screen="Force-distance exploration prompt, with two pre-connected syringe pairs per station (1:1 and small-to-big) plus spring scales, rulers, and clamps.",
+         say="Two pairs in front of you. Push one, then the other. Measure what comes out and write what you notice in your own words. Do not wait for me to name it.",
+         do="Circulate and keep teams measuring, not theorizing. Have them flip the small-to-big pair to feel the inverse, more distance and less force, but hold the vocabulary back.",
          watch=["Teams skipping the ruler and only feeling force / push them to record distance too",
                 "Hands varying push-to-push / fine for now, it sets up the rig demo later",
                 "The observation column left blank / one sentence per row is the whole point"],
          ask=[("Which one moved farther?", "Good. Now which one pushed harder? What is the trade you just made?"),
               ("Is this the right answer?", "There is no answer sheet here. What did your scale and ruler actually say?")],
-         note="Constructivist open. Students generate the pattern before any term exists. The observation column forces them to articulate it, which becomes the bridge into instruction. Do not name Pascal yet.",
+         note="Students articulate the pattern before any term exists, which becomes the bridge into instruction. Do not name Pascal yet.",
          callouts=[("warn", "Watch for", "Listen for language like more force but less movement or it barely moved but pushed really hard. Those exact phrases are your handoff into the next phase.")],
          extra=""),
     dict(id="d1p2", num="02", tag="Explicit Instruction", mins=11, title="Name it, reason it, prove it", slide=["slide04", "slide05", "slide06"],
-         screen="Three moves in sequence. Name the physics: Pascal's Principle (slide04). Reason out why a little wider is a lot stronger, since area grows with the square of diameter (slide05). Then formalize it as the equation (slide06).",
-         say="What you felt has a name. Push on a confined fluid and the pressure goes everywhere equally. That is Pascal's Principle. Now, why does the wider output push harder? Same pressure on more area, so more force, and because area grows with the square of diameter, a little wider means a lot stronger. What you gain in force you give back in distance. Here is the whole thing in one line: force multiplier equals output diameter over input diameter, squared. That is the number your scales were circling around.",
-         do="Move in order, never ahead of it. First relabel two or three of their Engage observations with the vocabulary out loud. Then point at the two syringe faces and stress the squared relationship before any formula. Finally write the equation and tie each symbol back to a part they held five minutes ago.",
+         screen="Slides name Pascal's Principle (slide04), reason why a little wider is a lot stronger (slide05), then formalize the equation (slide06).",
+         say="What you felt has a name. Push on a confined fluid and pressure goes everywhere equally · that is Pascal's Principle. Why does the wider output push harder? Same pressure on more area, and because area grows with the square of diameter, a little wider means a lot stronger. What you gain in force you give back in distance. In one line: force multiplier equals output diameter over input diameter, squared.",
+         do="Relabel a couple of their Engage observations with the vocabulary, then point at the two syringe faces and stress the squared relationship before writing the equation, tying each symbol back to a part they held.",
          watch=["Students treating Pascal as new info / it is a name for what they already measured",
                 "Teams thinking double the width means double the force / it is the square, surface that now",
                 "The distance trade getting lost / every force gain costs travel",
@@ -182,75 +190,75 @@ DAY1 = [
          ask=[("Is pressure the same as force?", "Close. Pressure is force spread over an area. What happens to force if the same pressure acts on a bigger area?"),
               ("Why squared and not just bigger?", "What are you actually comparing, the width across or the whole circle of fluid being pushed?"),
               ("Does it matter if I use radius or diameter?", "Try both on the same pair. What do you get? Why does the ratio survive either way?")],
-         note="One arc: felt, then named, then reasoned, then formalized. The equation arrives last, as a summary of intuition they already own, never as a fact handed down. If they own why area is squared, the formula is no surprise.",
+         note="The equation arrives last as a summary of intuition they already own, never as a fact handed down.",
          callouts=[("def", "Pascal's Principle", "Pressure applied to a confined fluid transmits equally in all directions throughout that fluid."),
                    ("hero", "The core trade", "Force and distance are a single budget. The area ratio decides how the budget gets spent. No configuration gives you both."),
                    ("def", "Area ratio equation", "Force multiplier = (output diameter / input diameter)^2. Output area over input area sets how much the force is amplified.")],
          extra=""),
     dict(id="d1p5", num="05", tag="Practice", mins=4, title="Your turn on the numbers", slide="slide07",
          screen="Three to four escalating ratio problems on the student sheet, from basic calculation to applied design tradeoff.",
-         say="Work the problems. Start with the plain calculation, then push into the ones where you have to choose a ratio for a job. There is a design decision hiding in the last one.",
-         do="Let them work. Resist solving. Spot-check the squared step. Keep this tight so the verify moment next is not squeezed out.",
+         say="Work the problems. The plain calculations come first, then ones where you choose a ratio for a job. A design decision is hiding in the last one.",
+         do="Let them work and resist solving. Spot-check the squared step, and keep this tight so the verify moment next is not squeezed out.",
          watch=["Forgetting to square / most common error here",
                 "Teams done fast / push them to the applied tradeoff problem and justify the choice"],
          ask=[("Which ratio is best?", "Best for what? More lifting force, or more reach and speed? What does the job need?")],
-         note="Practice cements the tool. Keep it brief. The verification that follows is the most powerful beat of the day and must not get crowded out.",
+         note="Practice cements the tool, but the verification that follows is the day's most powerful beat and must not get crowded out.",
          callouts=[("pill", "Time check", "Keep this to 4 minutes. If teams are still working, carry one problem into the rig demo discussion.")],
          extra=""),
     dict(id="d1p6", num="06", tag="Verify", mins=5, title="Did reality agree with the formula?", slide="slide08",
-         screen="Whole-class rig demo. A hand-wheel test stand with a digital force gauge applies a measured, repeatable input force no hand can match.",
-         say="Your scale said about four times. The equation said four to one. They did not match exactly. So where did the missing force go? Watch the rig. Same configuration, but the input is now perfectly steady.",
-         do="Run two configurations students just tested. Read the gauge input aloud, then the output. Compare rig output to prediction and to their hand-measured numbers. Land the punchline.",
+         screen="Whole-class rig demo: a hand-wheel test stand with a digital force gauge applies a repeatable input no hand can match.",
+         say="Your scale said about four times. The equation said four to one. They did not match. So where did the missing force go? Watch the rig, same configuration, but the input is now perfectly steady.",
+         do="Rerun two configurations students just tested, reading gauge input then output aloud against their prediction and hand numbers. Land the punchline: most of the gap was their hands, but the equation is still an ideal, and engineering lives in the remaining gap.",
          watch=["Students thinking the rig fixed the data / it isolated a variable, say so",
                 "The gap closing but not vanishing / that residual is the whole lesson"],
          ask=[("Why doesn't it ever hit exactly 4 to 1?", "What in a real system can leak, rub, or compress? Name three places the ideal loses force.")],
-         note="The need was built before the tool arrived. Students named my hand was inconsistent; the rig is the response to their own diagnosis. That is how controlled experiments work. Name it explicitly.",
+         note="Students diagnosed \"my hand was inconsistent,\" so the rig answers their own diagnosis, the need was built before the tool arrived.",
          callouts=[("warn", "Land this line", "Most of the gap was your hands. But even with a perfect input, the equation is still an ideal. Engineering lives in the remaining gap.")],
          extra="GAP"),
     dict(id="d1p7", num="07", tag="Challenge", mins=3, title="Some things humans should not touch", slide="slide09",
-         screen="The challenge framing. Real hydraulic arms move what people cannot or should not: excavators, surgical robots, jaws of life. The job: grip, lift, and place a half-full bottle with precision.",
+         screen="Challenge framing: real hydraulic arms move what people cannot or should not (excavators, surgical robots, jaws of life). The job: grip, lift, and place a half-full bottle with precision.",
          say="Hydraulics let machines do what hands cannot, in places hands should not be. Your job is the same shape as theirs: grip something, lift it, place it exactly where it needs to go. Reliably. Every time.",
-         do="Set the stakes and the standard. Precision and reliability, not speed. Preview that they will reverse-engineer a real arm with no manual.",
+         do="Set the standard: precision and reliability, not speed. Preview that they will reverse-engineer a real arm with no manual.",
          watch=["Teams hearing competition and racing in their heads / reliability first, speed is Day 3",
                 "Excitement without the precision frame / a wild lift that misses the zone scores nothing"],
          ask=[("How fast does it have to be?", "Fast enough is later. First: can it place the bottle exactly, every single time?")],
-         note="Career connection lives here: mechanical, industrial, and biomedical engineers solve this same multi-axis trade. The challenge is authentic, not a toy.",
+         note="This is the authentic multi-axis trade real mechanical, industrial, and biomedical engineers solve, not a toy.",
          callouts=[("hero", "The standard", "Grip. Lift. Place. With precision and reliability. The relay rewards machines that work every time, not machines that work once and impressively.")],
          extra=""),
     dict(id="d1p8", num="08", tag="Design", mins=12, title="No manual. Just the arm and a kit.", slide="slide10",
-         screen="Reverse-engineering the kit. Parts are etched with names. One part carries attachment instructions. Everything else is up to the team. No assembly instructions provided.",
-         say="No instructions. The parts are labeled and one part tells you how it attaches. The rest is yours to decode. Three moves before any glue: inventory, sketch, justify.",
-         do="Hold the line on all three moves. Inventory the parts and best-guess each function. Sketch the assembly with syringes placed and uncertainties marked. Then justify: how does the arm stay stable when extended and loaded? Teams that cannot point to their sketch and explain stability are not cleared to build.",
+         screen="Reverse-engineering the kit: parts are etched with names, one carries attachment instructions, no assembly instructions.",
+         say="No instructions. The parts are labeled and one tells you how it attaches. The rest is yours to decode. Three moves before any glue: inventory, sketch, justify.",
+         do="Hold the line on all three moves: inventory and best-guess each part, sketch the assembly with syringes placed and uncertainties marked, then justify how the arm stays stable when extended and loaded. Teams that cannot explain stability are not cleared to build. Normalize the 3D Robogripper as a no-penalty swap.",
          watch=["Teams reaching for glue before sketching / no build without a justified plan",
                 "Skipping the inventory / they will lose a part and not know it",
                 "Uncertainties erased instead of marked / question marks are data, keep them"],
          ask=[("What does this part do?", "Read the etched name. Where would a part with that name belong on something that has to lift and hold?"),
               ("Can we just use the Robogripper?", "Yes, any time, same mount, no penalty. It changes which engineering problem you are solving, not whether you are doing engineering.")],
-         note="The reverse-engineering approach levels the field: every team faces the same novel decoding problem. Productive struggle is the design. Do not shortcut it by hinting at the intended assembly.",
+         note="Reverse-engineering levels the field, so do not shortcut the productive struggle by hinting at the intended assembly.",
          callouts=[("warn", "Gate before build", "Justify your plan. Point to the sketch. Explain how it stays stable loaded and extended. No justification, no glue."),
                    ("pill", "Normalize the swap", "The 3D Robogripper is a seamless swap for the laser-cut claw at any point. Same mounting interface. No design penalty.")],
          extra=""),
     dict(id="d1p9", num="09", tag="Build", mins=35, title="Direction, not completion", slide="slide11",
-         screen="Teams begin assembly. No prescribed starting subsystem. Work from the sketch, dry-fit, and surface the first round of this does not fit problems.",
+         screen="Teams begin assembly with no prescribed starting subsystem, working from the sketch and dry-fitting to surface the first this does not fit problems.",
          say="Start wherever your sketch tells you to. Dry-fit before you commit. Today is not about finishing a subsystem. It is about committing to a direction and finding your first real problems.",
-         do="Circulate constantly. Redirect permanent gluing toward dry-fitting. Nudge teams who argue instead of building to test one connection on the table. There is no Day 1 checkpoint; end with parts dry-fitted or lightly attached and a clear plan for tomorrow.",
+         do="Circulate, redirecting permanent gluing toward dry-fitting and pushing teams who argue instead of building to test one connection on the table. There is no Day 1 checkpoint; end with parts dry-fitted and a plan for tomorrow.",
          watch=["Groups gluing permanently right away / redirect to dry-fit first",
                 "Groups debating the plan without touching parts / test one connection now",
                 "Drilling syringe holes without planning plunger travel / ask how far the plunger must move"],
          ask=[("Should we glue this yet?", "Does it work dry first? Commit with glue only after the dry-fit proves the fit."),
               ("We are stuck on where to start", "What is the one connection you are most sure about? Build that, learn from it, let it tell you what is next.")],
-         note="Failure is data, not punishment. Day 1 build is unstructured by design. The point is direction, not completion. Notice and iterate begins here.",
+         note="Day 1 build is unstructured by design; the point is direction, not completion, and notice and iterate begins here.",
          callouts=[("pill", "Mantras for this block", "Dry-fit before you commit. Direction, not completion. Notice and iterate."),
                    ("warn", "No Day 1 checkpoint", "Do not push for a finished subsystem. Dry-fitted parts plus a clear plan for Day 2 is a successful Day 1.")],
          extra=""),
     dict(id="d1p10", num="10", tag="Evaluate", mins=5, title="Pause. Write it down.", slide="slide12",
          screen="Day 1 reflection prompts in engineering notebooks.",
          say="Stop building. Three things in the notebook. What are you most sure about? What are you still figuring out? What is the first thing you do tomorrow?",
-         do="Protect the full five minutes. This is where today's direction gets locked so Day 2 opens at speed instead of from scratch.",
+         do="Protect the full five minutes. This locks today's direction so Day 2 opens at speed.",
          watch=["One-word answers / push for the specific first move tomorrow",
                 "Teams wanting to keep building / the written plan is what makes Day 2 fast"],
          ask=[("Why are we stopping to write?", "What is the first thing you would do tomorrow if you forgot everything? That sentence is why.")],
-         note="Reflection converts a messy build session into a plan. The Day 2 check-in reads directly off these notebooks.",
+         note="Reflection turns a messy build into a plan; the Day 2 check-in reads straight off these notebooks.",
          callouts=[("def", "Notebook prompts", "1 / What part are you most sure about?  2 / What part are you still figuring out?  3 / What is the first thing you need to do on Day 2?")],
          extra=""),
 ]
@@ -306,86 +314,86 @@ SECTION_ACCENTS = {
 
 DAY2 = [
     dict(id="d2p1", num="01", tag="Check-In", mins=5, title="Pick up where you left off", slide="slide14",
-         screen="Day 2 opener. Teams review Day 1 notebooks and the priority they wrote down. The day's gate is stated.",
-         say="Open your notebook to yesterday's plan. Find the first thing you said you would do. The goal by end of class: base, arm, and forearm attached and mobile, syringes mounted. Filling is optional today. Go.",
-         do="Keep this to five minutes. State the gate, then release to build. Minimal coach-led instruction from here on.",
+         screen="Day 2 opener: teams review Day 1 notebooks and their written priority, with today's gate stated.",
+         say="Open yesterday's plan and find the first thing you said you'd do. Goal by end of class: base, arm, and forearm attached and mobile, syringes mounted. Filling is optional. Go.",
+         do="Keep this to five minutes: state the gate, then release to build. Coach-led instruction ends here.",
          watch=["Teams re-planning from scratch / point them at yesterday's written first move",
                 "Asking for the gate twice / it is base + arm + forearm mobile, syringes mounted"],
          ask=[("Do we have to fill syringes today?", "Filling is Day 3 to avoid mid-build leaks. Can you dry-test joint motion without water today?")],
-         note="The Day 1 reflection is the launch pad. A tight check-in protects the 80-minute build window that follows.",
+         note="A tight check-in protects the 80-minute build window that follows.",
          callouts=[("pill", "Today's gate", "Base + arm + forearm attached and mobile, syringes mounted. Filling optional.")],
          extra=""),
     dict(id="d2p2", num="02", tag="Build", mins=80, title="Open build window. Build. Test. Iterate.", slide="slide15",
-         screen="Persistent build slide. No structured pauses. Students build, connect hydraulics, and dry-test joint articulation. Coaches circulate with the diagnostic field guide.",
-         say="This is your time. Build, connect, test the motion, fix what fails, build again. I am circulating. When something breaks, that is data. Notice and iterate.",
-         do="Circulate continuously with your teaching partner. Use the failure-mode field guide: diagnose by asking, not fixing. Keep the Robogripper bin open and offer the swap to any team whose claw is not working. Day 2 testing is dry-run only.",
+         screen="Persistent build slide. No structured pauses while students build, connect hydraulics, and dry-test articulation and coaches circulate with the field guide.",
+         say="This is your time. Build, connect, test the motion, fix what fails, build again. When something breaks, that is data. Notice and iterate.",
+         do="Circulate continuously with your partner and the failure-mode field guide, diagnosing by asking, not fixing. Offer the Robogripper swap to any team whose claw fails; testing is dry-run only.",
          watch=["Teams chasing new features instead of working motion / make what you have work",
                 "A claw that will not grip after repeated tries / offer the Robogripper swap",
                 "Filling syringes early / dry-run only today, water is Day 3"],
          ask=[("Can you give us the answer?", "What does the system do right now? What is the one thing you would change to test next?"),
               ("Is it okay that this broke?", "What did it tell you? Failure is data. What is your next iteration?")],
-         note="Maximum uninterrupted build time is the whole pedagogy of Day 2. Coaches diagnose with questions so teams own the fix. The full field guide is in the Reference tab.",
+         note="Maximum uninterrupted build time is the pedagogy of Day 2, and question-based diagnosis keeps teams owning the fix.",
          callouts=[("warn", "Coach stance", "Circulate and diagnose. Ask the question that lets the team find it. Resist solving the problem for them."),
                    ("pill", "Field guide", "See the Reference tab (press 4) for the eight common failures, their cause, and the question to ask.")],
          extra="FAILURES"),
     dict(id="d2p3", num="03", tag="Evaluate", mins=5, title="Today taught you something", slide="slide16",
          screen="Day 2 reflection prompts in engineering notebooks.",
-         say="Stop. Three in the notebook. What broke today and what did it teach you? If you could steal one idea from another team's arm, what and why? What is your one big concern for Day 3?",
-         do="Protect five minutes. Push past it broke toward what the break revealed. The steal-an-idea prompt spreads good solutions across the room.",
+         say="Stop. Three in the notebook. What broke today and what did it teach you? If you could steal one idea from another team's arm, what and why? Your one big concern for Day 3?",
+         do="Protect five minutes and push past \"it broke\" toward what the break revealed.",
          watch=["It just broke with no lesson named / what did the failure point to?",
                 "No concern named for Day 3 / surface it now so it is not a surprise tomorrow"],
          ask=[("What if nothing broke?", "Then what did you test that worked? Why did it work? That is just as much data.")],
-         note="Reflecting on failure as data closes the build day and seeds Day 3's finish-and-fix list.",
+         note="Reflecting on failure as data closes the build day and seeds Day 3's fix list.",
          callouts=[("def", "Notebook prompts", "1 / What broke or failed today, and what did you learn?  2 / One design idea you would steal from another team, and why?  3 / Your one big concern going into Day 3?")],
          extra=""),
 ]
 
 DAY3 = [
     dict(id="d3p1", num="01", tag="Build & Practice", mins=15, title="Finish and fill", slide="slide18",
-         screen="Teams fill syringes with water, bleed air bubbles, and make final adjustments. Robogripper swaps happen now if not already done.",
+         screen="Teams fill syringes, bleed air, and make final adjustments; Robogripper swaps happen now.",
          say="Fill your syringes. Bleed the air. Reinforce any leak, replace any kinked tube. No new features today. Make what you have work.",
-         do="Help teams bleed air and seal leaks. Do final Robogripper swaps now. Hold the no-new-features line firmly. This is finishing, not redesigning.",
+         do="Help teams bleed air, seal leaks, and finish Robogripper swaps. Hold the no-new-features line firmly: this is finishing, not redesigning.",
          watch=["Spongy response after filling / air in the line, bleed it",
                 "Last-minute feature ideas / no new features, make what exists work",
                 "Leaks at connections / reinforce or replace tubing before practice"],
          ask=[("Can we add one more thing?", "Does what you have already work reliably? Make that true first. No new features today."),
               ("Why is it still mushy?", "What is in the tube besides water? What happens to force when something compresses?")],
-         note="The mantra shifts here from notice and iterate to no new features, make what you have work. By practice time it shifts back to notice and iterate.",
+         note="The mantra shifts from notice and iterate to no new features, then back at practice time.",
          callouts=[("warn", "Today's rule", "No new features. Make what you have work. Filling and sealing only, not redesign.")],
          extra=""),
     dict(id="d3p2", num="02", tag="Build & Practice", mins=20, title="Solo precision lift and place", slide="slide18",
-         screen="Each group works at its own table with a marked pickup zone and a precision drop-off zone. Solo, low-stakes, repetition.",
+         screen="Each group at its own table with a marked pickup zone and a precision drop-off zone. Solo, low-stakes, repetition.",
          say="Your table, your reps. Pick up. Lift over. Place. Same move the relay needs, lower temperature. Tune grip, syringe response, and placement until it is reliable.",
-         do="Let teams iterate freely. This is direct practice for the relay: same skills, lower stakes. Encourage repetition over cleverness. Notice and iterate is back.",
+         do="Let teams iterate freely on grip, syringe response, and placement. Notice and iterate is back; reward repetition over cleverness.",
          watch=["One good lift treated as done / can they do it ten times in a row?",
                 "Tuning grip but ignoring placement accuracy / the drop zone is the scored part",
                 "Teams not using the full window / more clean reps now means more completions later"],
          ask=[("It worked once, are we ready?", "Once is luck. Can you do it five times without a drop? That is reliable."),
               ("Grip or placement first?", "Which one is failing more right now? Fix the one costing you the most reps.")],
-         note="Solo practice is the relay rehearsal at low stakes. Repetition builds the reliability the race rewards. Pick up. Lift over. Place.",
+         note="Low-stakes solo reps build the reliability the relay rewards.",
          callouts=[("pill", "Mantra", "Notice and iterate. Pick up. Lift over. Place. Reliability over flash."),
                    ("hero", "Practice is the race", "The relay is these same three moves under a clock and a crowd. Reps banked now are completions earned later.")],
          extra=""),
     dict(id="d3p3", num="03", tag="Compete", mins=40, title="Multi-robot relay race", slide="slide19",
          screen="Relay courses. Robots stay stationed at their zones; only the bottle moves. Random teams announced just before the race.",
          say="Teams are random and I am announcing them now. Robot 1 picks up and hands to Robot 2, down the chain, last robot places in the drop zone. I return the bottle, you start again. Sixty seconds. Most completions wins.",
-         do="Assign relay teams randomly on the spot; team size depends on attendance. Run two rounds with re-randomized teams between them; add Round 3 if time allows. You are the referee now: call resets, count completions, manage the clock, watch safety. Students return bottles to pickup themselves between completions during a run; you return the bottle only on an unrecoverable drop.",
+         do="Assign relay teams randomly on the spot, sized to attendance, and run two rounds with re-randomized teams (Round 3 if time allows). Once the race starts you officiate, not coach: call resets, count completions, manage the clock, watch safety; students return their own bottles between completions, and you return one only on an unrecoverable drop.",
          watch=["Robots crashing or plungers shoved past range / pause the match, safety first",
                 "Tubing whipping / stop and have the team secure it",
                 "Pre-game strategizing / the surprise teams are the point, announce late"],
          ask=[("That handoff failed, what do we do?", "Referee call only: re-grip allowed, or reset to pickup. Officiate it, do not coach through it.")],
-         note="Once the race starts, the coach is a referee, not a coach. Multiple bottles flow simultaneously; officiate, do not instruct. Random teams announced late prevent strategizing that defeats the format.",
+         note="Once the race starts the coach is a referee, not a coach, and late-announced random teams stop strategizing that would defeat the format.",
          callouts=[("warn", "Coach is a referee", "Call resets, count completions, manage the clock, watch for safety. No coaching mid-race."),
                    ("def", "Race mechanics", "60 seconds per match. Most completions wins. Two rounds, re-randomized between. Tiebreaker: re-run the final 30 seconds head-to-head.")],
          extra="RELAY"),
     dict(id="d3p4", num="04", tag="Debrief", mins=15, title="Closing reflection", slide="slide20",
-         screen="Debrief connecting design decisions to performance, then written reflection in engineering notebooks.",
-         say="Before you write: Team A completed more passes than Team B. Why? What did they do differently? Talk it out. Then four prompts in the notebook.",
-         do="Pull specific examples from what just happened. Let students explain to each other before writing. Steer toward design choices driving results, not luck.",
+         screen="Debrief linking design choices to performance, then four reflection prompts in the engineering notebooks.",
+         say="Before you write: Team A completed more passes than Team B. Why? What did they do differently? Talk it out. Then the four prompts in your notebook.",
+         do="Pull specific examples from the round and have students explain results to each other before writing, steering toward design choices over luck.",
          watch=["Best-built robot did not win / great discussion, why did reliability beat raw quality?",
                 "Crediting luck / push back toward the design decision that actually mattered"],
          ask=[("Did the best robot win?", "Not always. So what beat it? Reliability? Handoff fit? Name the design choice that decided it.")],
-         note="The debrief closes the loop opened on Day 1: hand-measured syringes connect to today's performance. That throughline is the unit's payoff.",
+         note="This closes the loop opened on Day 1, connecting the hand-measured syringes to today's performance, the unit's payoff.",
          callouts=[("def", "Notebook prompts", "1 / Cleanest handoff today and what made it work?  2 / Did the best-built robot always win? If not, why?  3 / How is today connected to the syringe equation from Day 1?  4 / With one more day, what would you change?")],
          extra=""),
 ]
@@ -403,6 +411,7 @@ for _p in DAY3:
 DAYS = [
     dict(id="day1", n=1, title="From Syringes to Systems", time="90 min", cover="slide01", second="slide02",
          goal="Explore the force-distance tradeoff quantitatively, name the physics, verify the equation under controlled input, decode the laser-cut kit, and begin the build.",
+         companion=True,
          phases=DAY1),
     dict(id="day2", n=2, title="Build the Machine", time="90 min", cover="slide13", second=None,
          goal="Complete a functional rescue arm by end of period: base, arm, and forearm attached and mobile, syringes mounted. Maximum build and test time, minimal instruction.",
@@ -531,6 +540,18 @@ a{color:var(--teal);}
 .deck-dl .dt{display:block;font-family:'Outfit';font-weight:700;font-size:16px;color:#fff;}
 .deck-dl .dm{display:block;font-size:13px;color:rgba(255,255,255,.82);margin-top:1px;}
 .deck-dl .dgo{font-family:'Outfit';font-weight:700;font-size:13px;color:var(--gold);white-space:nowrap;}
+
+/* student companion app link (turquoise, to read as the student-facing tool) */
+.app-dl{display:flex;align-items:center;gap:16px;text-decoration:none;
+  background:linear-gradient(135deg,var(--turquoise) 0%,var(--teal) 100%);color:#fff;
+  border-radius:12px;padding:18px 22px;box-shadow:var(--shadow);transition:filter .15s,transform .15s;}
+.app-dl:hover{filter:brightness(1.06);transform:translateY(-1px);}
+.app-dl .aico{flex:none;width:40px;height:40px;border-radius:9px;background:rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;color:#fff;}
+.app-dl .dtxt{flex:1;}
+.app-dl .dt{display:block;font-family:'Outfit';font-weight:700;font-size:16px;color:#fff;}
+.app-dl .dm{display:block;font-size:13px;color:rgba(255,255,255,.85);margin-top:1px;}
+.app-dl .ago{font-family:'Outfit';font-weight:700;font-size:13px;color:#fff;white-space:nowrap;}
 
 /* background-knowledge links */
 .bglist{display:grid;gap:11px;}
@@ -889,8 +910,35 @@ def render_day(d):
     <div class="meta"><div class="time">{d['time']}</div><div class="cnt">{count_label}</div></div>
   </div>
   <div class="day-cover">{cover}</div>
+  {render_app_section() if d.get("companion") else ""}
   {phases}
 </section>"""
+
+
+def render_app_card():
+    a = COMPANION_APP
+    return (
+        f'<a class="app-dl" href="{esc(a["url"])}" target="_blank" rel="noopener">'
+        '<span class="aico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" '
+        'stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'
+        '<path d="M5 3l14 9-14 9V3z"/></svg></span>'
+        f'<span class="dtxt"><span class="dt">{esc(a["title"])}</span>'
+        f'<span class="dm">{a["blurb"]}</span></span>'
+        '<span class="ago">Open &nearr;</span></a>'
+    )
+
+
+def render_app_section():
+    """Companion-app block reused on Home, the top of Day 1, and Reference."""
+    a = COMPANION_APP
+    return (
+        '<div class="section-title">Student companion app</div>'
+        + render_app_card()
+        + '<div class="note-block" style="background:var(--turquoise-soft);'
+        'border-left-color:var(--turquoise);color:var(--teal-dark);">'
+        + esc(a["detail"])
+        + ' Opens in a browser and needs an internet connection, unlike the rest of this guide.</div>'
+    )
 
 
 def render_home():
@@ -922,6 +970,8 @@ def render_home():
     <div class="arc">{arc}</div>
   </div>
 
+  {render_app_section()}
+
   <div class="section-title">Unit objectives</div>
   <div class="grid g2">{objs}</div>
 
@@ -939,6 +989,7 @@ def render_home():
     <p style="margin-top:0;">Click any phase to expand its coaching detail. Each phase has a suggested timer, prev/next navigation, and a private notes field saved on this device.</p>
     <p><b>Reference</b> (top nav or press 4) gathers everything you look up mid-class: a download for the slide deck, the syringe equation, configuration cheat-sheet, materials, payload and relay specs, race rules, and vocabulary.</p>
     <p>The <b>Reference</b> tab also holds the Day 2 <b>failure-mode field guide</b>: the common failures, their cause, and the question to ask. Print at any time; each phase is set to avoid splitting across pages.</p>
+    <p>Day 1 has a <b>student companion app</b>, the Hydraulic Force Lab, linked at the top of this page, on Day 1, and in Reference. Put it on student devices to run alongside the physical syringe work.</p>
     <p style="margin-bottom:0;"><b>Keyboard:</b> 1 / 2 / 3 jump to days &middot; 4 reference &middot; H home &middot; arrows move between phases &middot; Esc closes.</p>
   </div>
 </section>"""
@@ -1000,6 +1051,8 @@ def render_reference():
   </div>
 
   {deck_section}
+
+  {render_app_section()}
 
   <div class="section-title">The core equation</div>
   <div class="callout hero"><div class="ct">Force multiplier</div>Force multiplier = (output diameter / input diameter)<sup>2</sup>. Output area over input area sets how much the force is amplified. The equation is the ideal; friction, seal drag, and air in the line live in the gap between it and what the scales read.</div>
